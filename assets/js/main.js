@@ -26,15 +26,14 @@ function convertToHtml(pokemon){
 const pokemonList = document.getElementById('pokedex')
 //pokemonList.innerHTML += convertToHtml()
 
-fetch(url)
-    .then((resp)=> resp.json())
-    .then((jsonBody)=> jsonBody.results)
-    .then((pokemonLi)=> {
+const listItems = [];
+
+pokeApi.convertToHTML().then((pokemonLi)=> {
         for (let i = 0; i < pokemonLi.length; i++) {
             const pokemon = pokemonLi[i];
-            pokemonList.innerHTML += convertToHtml(pokemon)
-            
+            listItems.push(convertToHtml(pokemon));            
         }
+        pokemonList.innerHTML += listItems
     })
     .catch((error)=> console.error(error))
     .finally(console.log('Sucesso!'))
