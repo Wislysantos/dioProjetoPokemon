@@ -24,25 +24,9 @@ function convertToHtml(pokemon){
 }
 
 const pokemonList = document.getElementById('pokedex')
-//pokemonList.innerHTML += convertToHtml()
-
-const listItems = [];
 
 pokeApi.convertToHTML().then((pokemons)=> {
-    pokemons.map(pokemon=> {
-        listItems.push(convertToHtml(pokemon))
-    })
-
-    pokemonList.innerHTML += listItems
-    
-        /**
-         * 
-        for (let i = 0; i < pokemonLi.length; i++) {
-            const pokemon = pokemonLi[i];
-            listItems.push(convertToHtml(pokemon));            
-        }
-        pokemonList.innerHTML += listItems
-        */
+    pokemonList.innerHTML += (pokemons.map(convertToHtml)).join('')
     })
     .catch((error)=> console.error(error))
     .finally(console.log('Sucesso!'))
