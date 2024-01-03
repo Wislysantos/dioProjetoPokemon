@@ -2,7 +2,8 @@ const pokemonList = document.getElementById('pokedex')
 const loadPokemonButton = document.getElementById('LoadMore')
 
 let offset = 0
-const  limit = 10
+const  limit = 5
+const maxPage = 15 
 
 function loadPokemonItens(offset, limit){
     pokeApi.convertToHTML(offset, limit).then((pokemons)=> {
@@ -35,7 +36,14 @@ loadPokemonItens(offset, limit)
 
 loadPokemonButton.addEventListener('click', ()=>{
     offset += limit
-    loadPokemonItens(offset, limit)
+    const qtdPage = offset + limit 
+    if(maxPage >= qtdPage){
+        const  newLimit =  maxPage - offset
+        loadPokemonItens(offset, limit)
+        loadPokemonButton.parentElement.removeChild(loadPokemonButton)
+    }else{
+        loadPokemonItens(offset, limit)
+    }
 })
 
 
